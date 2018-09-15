@@ -1,0 +1,15 @@
+IW -
+format details at https://earth.esa.int/web/sentinel/technical-guides/sentinel-1-sar/products-algorithms/level-1-product-formatting
+preview/map-overlay.kml --> latlong polygon enclosing the area
+measurement/*.tiff --> actual, seemingly grayscale images (possibly 16 bit) (level-1)
+support/s1-level-1-product.xsd --> describes the xml fields
+
+http://learningzone.rspsoc.org.uk/index.php/Learning-Materials/Radar-Imaging/Image-Interpretation-Polarisation -
+
+HV and VH Polarisations: 
+
+Cross-polarisation is useful when volume (multiple) scattering occurs. It can allow the separation of soil and vegetation and of forest and non-forest.
+
+VV Polarisation:
+
+On its own, VV polarisation is used extensively for studying capillary waves on the surface of water bodies.
