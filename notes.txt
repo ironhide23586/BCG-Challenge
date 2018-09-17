@@ -13,3 +13,47 @@ Cross-polarisation is useful when volume (multiple) scattering occurs. It can al
 VV Polarisation:
 
 On its own, VV polarisation is used extensively for studying capillary waves on the surface of water bodies.
+
+
+
+MSI -
+
+2016 UUT L1C - same place as 2018 UUT L2A
+12 spectral bands
+
+Level-1C product provides orthorectified Top-Of-Atmosphere (TOA) reflectance, with sub-pixel multispectral registration. Cloud and land/water masks are included in the product.
+
+Level-2A product provides orthorectified Bottom-Of-Atmosphere (BOA) reflectance, with sub-pixel multispectral registration. A Scene Classification map (cloud, cloud shadows, vegetation, soils/deserts, water, snow, etc.) is included in the product -- where tf is this?
+
+Spectral response - https://earth.esa.int/web/sentinel/technical-guides/sentinel-2-msi/msi-instrument
+
+
+https://sentinel.esa.int/web/sentinel/user-guides/sentinel-2-msi/definitions-
+True Colour Images (TCI)
+Following the introduction of the Compact Naming Convention on the 6th of December 2016 (see the Sentinel-2 User Guide Product Naming Convention page for details), a TCI (True Colour Image) in JPEG2000 format is included within the Tile folder of Level-1C products in this format(1). The TCI is an RGB image built from the B02 (Blue), B03 (Green), and B04 (Red) Bands. The reflectances are coded between 1 and 255, 0 being reserved for 'No Data'. The saturation level of 255 digital counts correspond to a level of 2000 for the individual bands (i.e. reflectance of 0.2).
+
+(1) Products acquired before the 6th of December 2016, and products reprocessed within the PDGS  - including those Reprocessed after the 6th of December - still use the old format Naming Convention.
+
+
+33UUT lat longs-
+
+52.3140232376153,12.0657982282501 
+51.3280532477758,12.1292108515397 
+51.3560798433897,13.7045784646816 
+52.3430543844249,13.6759245503229 
+52.3140232376153,12.0657982282501 
+
+
+33UUU lat longs- (a tile north of 33UUT)
+
+53.2119778260595,12.0047609250912 
+52.2262108698791,12.071595116355 
+52.2551507482845,13.6785440650184 
+53.241963547145,13.648341514502
+53.2119778260595,12.0047609250912 
+
+
+Tiling2latlong from https://sentinel.esa.int/documents/247904/1955685/S2A_OPER_GIP_TILPAR_MPC__20151209T095117_V20150622T000000_21000101T000000_B00.kml
+
+bl_xy = [300004, 5690215]
+tr_xy = [409805, 5800015]
