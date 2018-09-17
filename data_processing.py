@@ -181,12 +181,17 @@ def reconstruct_color_img(b, g, r, rgb=True):
     return im, b_pp, g_pp, r_pp
 
 
-def extract_cloudmasks(cloudmasks_raw):
+def extract_cloudmasks(cloudmasks_raw, cloud_types=['OPAQUE', 'CIRRUS']):
     mask_tags_raw = np.array([t for t in cloudmasks_raw if 'gml:posList' in str(t)])
 
-    # mask_type_tags_raw = np.array([str(t) for t in cloudmasks_raw if 'maskType' in str(t)])
-    # opaque_indices = np.array([i for i in range(len(mask_type_tags_raw)) if 'OPAQUE' in mask_type_tags_raw[i]])
-    # mask_tags_raw = mask_tags_raw[opaque_indices]
+    indices = []
+    for cloud_type in cloud_types:
+        mask_type_tags_raw = np.array([str(t) for t in cloudmasks_raw if 'maskType' in str(t)])
+        local_indices = [i for i in range(len(mask_type_tags_raw))
+                         if cloud_type in mask_type_tags_raw[i]]
+        indices += local_indices
+
+    mask_tags_raw = mask_tags_raw[indices]
 
     mask_tags_str = [str(mask_tag.strip())[2:-1]
                      [len('<gml:posList srsDimension="2">')
@@ -293,8 +298,8 @@ def msi_l1c_image_process(folder_path):
 
     extraction_masks = np.array(extraction_masks)
     cloudmask_repeated = np.tile(cloudmask, [3, 1, 1])
-    extraction_masks_multipliers = (extraction_masks * cloudmask_repeated) / 65535
-    extraction_masks_multipliers[cloudmask_repeated == 0] = 1.
+    # extraction_masks_multipliers = (extraction_masks * cloudmask_repeated) / 65535
+    # extraction_masks_multipliers[cloudmask_repeated == 0] = 1.
 
     cloud_cleaned_img_raw = (true_imgs * (1 - cloudmask_repeated)) + (extraction_masks * cloudmask_repeated)
     cloud_cleaned_img_raw = cloud_cleaned_img_raw.astype(np.uint16)
@@ -344,9 +349,9 @@ if __name__ == '__main__':
     # cloud_cleaned_img_8bit_s2a_201609_l1c_t33uut, reconstructed_tcl_img_8bit_s2a_201609_l1c_t33uut \
     #     = msi_l1c_image_process(s2a_201609_l1c_t33uut_folder)
 
-    # cloud_cleaned_img_16bit_s2a_201609_l1c_t33uuu, cloudmask_reconstructed_8bit_s2a_201609_l1c_t33uuu, \
-    # cloud_cleaned_img_8bit_s2a_201609_l1c_t33uuu, reconstructed_tcl_img_8bit_s2a_201609_l1c_t33uuu \
-    #     = msi_l1c_image_process(s2a_201609_l1c_t33uuu_folder)
+    cloud_cleaned_img_16bit_s2a_201609_l1c_t33uuu, cloudmask_reconstructed_8bit_s2a_201609_l1c_t33uuu, \
+    cloud_cleaned_img_8bit_s2a_201609_l1c_t33uuu, reconstructed_tcl_img_8bit_s2a_201609_l1c_t33uuu \
+        = msi_l1c_image_process(s2a_201609_l1c_t33uuu_folder)
 
     cloud_cleaned_img_16bit_s2a_201809_l2a_t33uut, cloudmask_reconstructed_8bit_s2a_201809_l2a_t33uut, \
     cloud_cleaned_img_8bit_s2a_201809_l2a_t33uut, reconstructed_tcl_img_8bit_s2a_201809_l2a_t33uut \
